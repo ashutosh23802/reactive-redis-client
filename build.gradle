@@ -1,0 +1,37 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.12'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'tiaa.in'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: "junit", module: "junit"
+	}
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation "org.mockito:mockito-inline:3.11.2"
+}
+
+test {
+	systemProperty 'spring.profiles.active', 'test'
+	useJUnitPlatform()
+	reports {
+		junitXml.enabled = true
+		html.enabled = false
+	}
+}
+
+
